@@ -1,38 +1,53 @@
 import { useState, useEffect } from "react";
 
 function App() {
-    useEffect(() => {
-        fetchData();
-    }, []);
-    const [todos, setTodos] = useState([]);
-    async function fetchData() {
-        let url = ` https://jsonplaceholder.typicode.com/todos`;
+    const [id, setId] = useState("");
+    const [error, setError] = useState(false);
+    const [title, setTitle] = useState({});
+    const getData = async e => {
+        e.preventDefault();
+
+        if (id <= 0) {
+            setError(true);
+            setTitle({});
+            setId("");
+            return;
+        }
+        let url = `https://jsonplaceholder.typicode.com/todos/${id}`;
         const res = await fetch(url);
         const data = await res.json();
-        setTodos(data);
-    }
+        setError(false);
+        setTitle(data);
+        setId("");
+    };
     return (
-  <div className="overflow-x-auto">
-    <table className="table-fixed w-full max-w-3xl mx-auto bg-white shadow-md rounded-lg">
-        <thead className="bg-gray-200 border-b">
-            <tr>
-                <th className="border-r px-4 py-2">Id</th>
-                <th className="border-r px-4 py-2">Title</th>
-                <th className="border-r px-4 py-2">Completed</th>
-            </tr>
-        </thead>
-        <tbody className="text-center">
-            {todos.map(todo => (
-                <tr key={todo.id} className="border-b hover:bg-gray-100">
-                    <td className="border-r px-4 py-2">{todo.id}</td>
-                    <td className="border-r px-4 py-2">{todo.title}</td>
-                    <td className="border-r px-4 py-2">{todo.completed ? 'Yes' : 'No'}</td>
-                </tr>
-            ))}
-        </tbody>
-    </table>
-</div>
+        <form onSubmit={getData}>
+            <div className="m-5">
+                <input
+                    type="number"
+                    className="bg-sky-100 py-5 px-1.5 mr-5  outline-none font-bold text-2xl"
+                    value={id}
+                    onChange={e => setId(e.target.value)}
+                    placeholder="Enter between 1 to 200"
+                />
+                <button
+                    className="bg-gray-50 my-3 px-5 py-1.5 rounded font-bold text-[18px] text-red-900 hover:bg-red-900 hover:text-gray-50"
+                    type="submit"
+                >
+                    Get Data
+                </button>
 
+                <div className="font-bold text-2xl">
+                    {error && <p>please enter 1 to 200</p>}
+                    {title.id && (
+                        <>
+                            <p> User Id - {title.id}</p>
+                            <p>Title - {title.title}</p>
+                        </>
+                    )}
+                </div>
+            </div>
+        </form>
     );
 }
 
