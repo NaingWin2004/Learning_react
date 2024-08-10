@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    body {
+        @apply bg-gray-50;
+    }
+    .btn-close {
+        @apply px-2 py-1 font-medium tracking-wide text-gray-900 capitalize transition-colors duration-300 transform border border-gray-600 rounded focus:outline-none focus:ring focus:ring-gray-600 focus:ring-opacity-80;
+    }
+    .btn-order {
+        @apply px-4 py-1.5 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform border border-gray-600 bg-gray-700 hover:bg-gray-500 rounded focus:outline-none focus:ring focus:ring-gray-400 focus:ring-opacity-80;
+    }
+    .btn {
+        @apply mt-2 rounded text-gray-900 border border-gray-900 active:bg-gray-900 active:text-white;
+    }
+}

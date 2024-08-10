@@ -1,11 +1,11 @@
-
-
+import Main from "./layouts/Main.jsx";
+import ItemContextProvider from "./store/ItemContext";
 function App() {
-  
-  return (
-    <div className="text-3xl font-bold underline">Hello React</div>
-    )
-  
+    return (
+        <ItemContextProvider>
+            <Main />
+        </ItemContextProvider>
+    );
 }
 
-export default App
+export default App;
