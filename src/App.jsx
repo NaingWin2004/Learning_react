@@ -1,11 +1,7 @@
-
+import Counter from './components/Counter.jsx'
 
 function App() {
-  
-  return (
-    <div className="text-3xl font-bold underline">Hello React</div>
-    )
-  
+    return <div className=""><Counter/></div>;
 }
 
-export default App
+export default App;
